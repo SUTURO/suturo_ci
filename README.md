@@ -29,10 +29,14 @@ This repository contains the scripts used by the SUTURO bachelor and master proj
     sudo -H pip install protobuf tinyrpc==0.9.4 zmq pybullet scipy==1.2.2 casadi sortedcontainers hypothesis==4.34.0 pandas==0.24.2 numpy==1.16
     sudo -H pip3 install simplenlg sling tinyrpc==0.9.4 zmq
 
-## install opencv
+## clone this repo
+We generally recommend creating a SUTURO folder in your $HOME. In this folder you should clone this repository.
 
-clone this repo
+## install opencv and caffe
+Staying in SUTURO
 
-source setup/opencv/install.sh
+    source setup/opencv/install.sh
+    sudo make install opencv/opencv4_5_1
 
-source setup/caffe/install.sh
+    source setup/caffe/install.sh
+    sudo make install caffe/caffe

@@ -1,10 +1,6 @@
 #!/bin/bash
 # This file should be sourced
 
-sudo apt-get install -y libboost-all-dev libopenblas-dev libprotobuf-dev libleveldb-dev libsnappy-dev libopencv-dev libhdf5-serial-dev protobuf-compiler the python-dev libgflags-dev libgoogle-glog-dev liblmdb-dev 
-
-sudo pip install protobuf
-
 mkdir caffe
 cd caffe
 
@@ -27,8 +23,6 @@ echo "running cmake"
 cmake .. >> ../../cmake_output
 echo "running make all"
 make -j($ nproc) all >> ../../make_output
-echo "running make install"
-make install >> ../../make_install_output
 
 cd ../../..
 

@@ -1,8 +1,6 @@
 #!/bin/bash
 # This file should be sourced
 
-sudo apt install -y cmake g++ wget unzip
-
 mkdir opencv
 cd opencv
 
@@ -24,8 +22,6 @@ echo "running cmake"
 cmake -DOPENCV_EXTRA_MODULES_PATH=../../opencv_contrib_4_5_1/modules .. >> ../../cmake_output
 echo "running make all"
 make -j($ nproc) >> ../../make_output
-echo "running make install"
-make install >> ../../make_install_output
 
 cd ../../..
 

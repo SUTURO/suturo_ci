@@ -1,6 +1,10 @@
 #!/bin/bash
 # This file should be sourced
 
+sudo apt-get install -y libboost-all-dev libopenblas-dev libprotobuf-dev libleveldb-dev libsnappy-dev libopencv-dev libhdf5-serial-dev protobuf-compiler the python-dev libgflags-dev libgoogle-glog-dev liblmdb-dev 
+
+sudo pip install protobuf
+
 mkdir caffe
 cd caffe
 
@@ -13,7 +17,7 @@ rm caffe.zip
 
 cd caffe
 echo "Downloading custom Makefile.config"
-wget -q -O Makefile.config
+wget -q -O Makefile.config https://raw.githubusercontent.com/SUTURO/suturo_ci/master/setup/caffe/Makefile.config
 
 
 mkdir build

@@ -1,6 +1,8 @@
 #!/bin/bash
 # This file should be sourced
 
+sudo apt install -y cmake g++ wget unzip
+
 mkdir opencv
 cd opencv
 

@@ -11,7 +11,7 @@ echo "Unpacking Caffe"
 unzip -qq caffe.zip
 rm caffe.zip
 
-cd caffe
+cd caffe-master
 echo "Downloading custom Makefile.config"
 wget -q -O Makefile.config https://raw.githubusercontent.com/SUTURO/suturo_ci/master/setup/caffe/Makefile.config
 

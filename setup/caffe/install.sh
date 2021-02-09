@@ -22,7 +22,7 @@ cd build
 echo "running cmake"
 cmake .. >> ../../cmake_output
 echo "running make all"
-make -j($ nproc) all >> ../../make_output
+make -j$(nproc) all >> ../../make_output
 
 cd ../../..
 

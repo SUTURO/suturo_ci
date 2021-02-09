@@ -13,7 +13,7 @@ tar xfz opencv4_5_1.tar.gz
 tar xfz opencv_contrib_4_5_1.tar.gz
 rm opencv4_5_1.tar.gz opencv_contrib_4_5_1.tar.gz
 
-cd opencv4_5_1
+cd opencv-4.5.1
 
 mkdir build
 cd build

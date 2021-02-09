@@ -22,7 +22,8 @@ This repository contains the scripts used by the SUTURO bachelor and master proj
     sudo sh -c 'mkdir -p /etc/apt/auth.conf.d'
     sudo sh -c '/bin/echo -e "machine packages.hsr.io\nlogin hsr-user\npassword jD3k4G2e" >/etc/apt/auth.conf.d/auth.conf'
 
-    sudo add-apt-repository ppa:robosherlock/ppa
+    # We want couchdb configured without a preset
+    sudo echo "couchdb couchdb/mode select none" | debconf-set-selections
 
     sudo apt-get install -y cmake g++ wget unzip libboost-all-dev libopenblas-dev libprotobuf-dev libleveldb-dev libsnappy-dev libopencv-dev libhdf5-serial-dev protobuf-compiler the python-dev libgflags-dev libgoogle-glog-dev liblmdb-dev python-pip python3-pip ros-melodic-desktop-full python-rosdep python-rosinstall python-rosinstall-generator python-wstool build-essential python-rosdep ros-melodic-tmc-desktop-full ros-melodic-roslisp-repl rapidjson-dev automake libxerces-c-dev libicu-dev libapr1-dev mongodb openjdk-8-jdk
 

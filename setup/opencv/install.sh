@@ -19,7 +19,7 @@ mkdir build
 cd build
 
 echo "running cmake"
-cmake -DOPENCV_EXTRA_MODULES_PATH=../../opencv_contrib_4_5_1/modules .. >> ../../cmake_output
+cmake -DOPENCV_EXTRA_MODULES_PATH=../../opencv_contrib-4.5.1/modules .. >> ../../cmake_output
 echo "running make all"
 make -j$(nproc) >> ../../make_output
 

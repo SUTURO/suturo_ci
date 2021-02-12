@@ -1,0 +1,51 @@
+# We are running Ubuntu 18.04 for melodic
+FROM ros:melodic-ros-core
+
+MAINTAINER Paul Schnipper
+
+
+# Setup Timezone stuff
+ENV TZ=Europe/Berlin
+RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
+
+# dont get warning from "danagerous usage of apt-key" only a problem when keys go outof date (they allways have to be fetch on demand)
+ENV APT_KEY_DONT_WARN_ON_DANGEROUS_USAGE=TRUE
+
+# Install the basics and gazebo
+RUN apt update && \
+    apt install --no-install-recommends -y software-properties-common wget git gnupg lsb-release apt-utils python-pip python3-venv python3-pip --no-install-recommends -y
+    
+RUN sh -c 'echo "deb http://packages.ros.org/ros/ubuntu $(lsb_release -sc) main" > /etc/apt/sources.list.d/ros-latest.list' && \
+    apt-key adv --keyserver 'hkp://keyserver.ubuntu.com:80' --recv-key C1CF6E31E6BADE8868B172B4F42ED6FBAB17C654 && \
+    sh -c 'echo "deb http://packages.ros.org/ros/ubuntu `lsb_release -sc` main" > /etc/apt/sources.list.d/ros-latest.list' && \
+    wget http://packages.ros.org/ros.key -q -O - | apt-key add - && \
+    sh -c 'echo "deb https://packages.hsr.io/ros/ubuntu `lsb_release -cs` main" > /etc/apt/sources.list.d/tmc.list' && \
+    sh -c 'echo "deb https://packages.hsr.io/tmc/ubuntu `lsb_release -cs` multiverse main" >> /etc/apt/sources.list.d/tmc.list' && \
+    sh -c 'echo "deb http://packages.osrfoundation.org/gazebo/ubuntu-stable `lsb_release -cs` main" > /etc/apt/sources.list.d/gazebo-stable.list' && \
+    sh -c 'echo "deb https://apache.bintray.com/couchdb-deb `lsb_release -cs` main" > /etc/apt/sources.list.d/couchdb.list' && \
+    wget https://hsr-user:jD3k4G2e@packages.hsr.io/tmc.key -q -O - | apt-key add - && \
+    wget http://packages.osrfoundation.org/gazebo.key -q -O - | apt-key add - && \
+    wget https://couchdb.apache.org/repo/bintray-pubkey.asc -q -O - | apt-key add - && \
+    sh -c 'mkdir -p /etc/apt/auth.conf.d' && \
+    sh -c '/bin/echo -e "machine packages.hsr.io\nlogin hsr-user\npassword jD3k4G2e" >/etc/apt/auth.conf.d/auth.conf' && \
+    sh -c 'echo "deb http://packages.ros.org/ros/ubuntu $(lsb_release -sc) main" > /etc/apt/sources.list.d/ros-latest.list' && \
+    apt-key adv --keyserver 'hkp://keyserver.ubuntu.com:80' --recv-key C1CF6E31E6BADE8868B172B4F42ED6FBAB17C654 && \
+    apt update && \
+    echo "couchdb couchdb/mode select none" | debconf-set-selections
+    
+RUN apt-get install -y --no-install-recommends python-catkin-tools cmake g++ wget python3-setuptools python-setuptools unzip libboost-all-dev libopenblas-dev libprotobuf-dev libleveldb-dev libsnappy-dev libopencv-dev libhdf5-serial-dev protobuf-compiler the python-dev libgflags-dev libgoogle-glog-dev liblmdb-dev python-pip python3-pip ros-melodic-ros-base python-rosdep python-rosinstall python-rosinstall-generator python-wstool build-essential python-rosdep ros-melodic-tmc-desktop-full ros-melodic-roslisp-repl rapidjson-dev automake libxerces-c-dev libicu-dev libapr1-dev mongodb openjdk-8-jdk  --no-install-recommends -y && \
+    rm -rf /var/lib/apt/lists/* && \
+    pip install wheel && pip3 install wheel &&\
+    pip install --upgrade setuptools && \
+    pip install protobuf tinyrpc==0.9.4 zmq pybullet scipy==1.2.2 casadi sortedcontainers hypothesis==4.34.0 pandas==0.24.2 numpy==1.16 rdflib && \
+    pip3 install --upgrade setuptools && \
+    pip3 install numpy simplenlg http://www.jbox.dk/sling/sling-2.0.0-py3-none-linux_x86_64.whl tinyrpc==0.9.4 zmq
+    
+RUN rosdep init && \
+    rosdep update
+   
+COPY resources/ /resources/
+COPY entrypoint.sh /entrypoint.sh
+
+# Code file to execute when the docker container starts up (`entrypoint.sh`)
+RUN /bin/bash -c "source entrypoint.sh"

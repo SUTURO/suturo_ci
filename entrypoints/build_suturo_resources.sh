@@ -3,6 +3,8 @@
 mkdir -p resources_ws/src
 mv resources resources_ws/src/
 
+source /opt/ros/melodic/setup.bash
+
 cd resources_ws && catkin build
 
 echo "Building SUTURO Resources Successfull"

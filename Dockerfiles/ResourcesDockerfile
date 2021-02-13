@@ -48,4 +48,4 @@ COPY resources/ /resources/
 COPY entrypoint.sh /entrypoint.sh
 
 # ! test produces exit code 1 when the file error exists
-RUN /bin/bash -c "source entrypoint.sh" && echo "############################################" && cat error && ! test -s error
+RUN /bin/bash -c "source entrypoint.sh"

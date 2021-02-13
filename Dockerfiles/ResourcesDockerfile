@@ -48,4 +48,4 @@ COPY resources/ /resources/
 COPY entrypoint.sh /entrypoint.sh
 
 # Code file to execute when the docker container starts up (`entrypoint.sh`)
-RUN /bin/bash -c "source entrypoint.sh"
+RUN /bin/bash -c "source entrypoint.sh" && test -s error && echo "Test if error exits successfull" && exit 1 && echo "after exit 1"

@@ -5,4 +5,4 @@ mv resources resources_ws/src/
 
 source /opt/ros/melodic/setup.bash
 
-cd resources_ws && catkin build --no-status 2> error 
+cd resources_ws && catkin build --no-status

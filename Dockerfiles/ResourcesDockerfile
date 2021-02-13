@@ -47,5 +47,5 @@ RUN rosdep init && \
 COPY resources/ /resources/
 COPY entrypoint.sh /entrypoint.sh
 
-# Code file to execute when the docker container starts up (`entrypoint.sh`)
-RUN /bin/bash -c "source entrypoint.sh" && test -s error && exit 1
+# ! test produces exit code 1 when the file error exists
+RUN /bin/bash -c "source entrypoint.sh" && ! test -s error

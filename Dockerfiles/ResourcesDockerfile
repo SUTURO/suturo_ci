@@ -37,9 +37,9 @@ RUN apt-get install -y --no-install-recommends python-catkin-tools cmake g++ wge
     rm -rf /var/lib/apt/lists/* && \
     pip install wheel && pip3 install wheel &&\
     pip install --upgrade setuptools && \
-    pip install protobuf tinyrpc==0.9.4 zmq pybullet scipy==1.2.2 casadi sortedcontainers hypothesis==4.34.0 pandas==0.24.2 numpy==1.16 rdflib && \
+    pip install protobuf tinyrpc==0.9.4 pyzmq pybullet scipy==1.2.2 casadi sortedcontainers hypothesis==4.34.0 pandas==0.24.2 numpy==1.16 rdflib && \
     pip3 install --upgrade setuptools && \
-    pip3 install numpy simplenlg http://www.jbox.dk/sling/sling-2.0.0-py3-none-linux_x86_64.whl tinyrpc==0.9.4 zmq
+    pip3 install numpy simplenlg http://www.jbox.dk/sling/sling-2.0.0-py3-none-linux_x86_64.whl tinyrpc==0.9.4 pyzmq
     
 RUN rosdep init && \
     rosdep update

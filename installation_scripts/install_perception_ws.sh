@@ -17,5 +17,10 @@ wstool update
 rosdep install --from-path robosherlock --ignore-src -r
 rosdep install --from-path rs_resources --ignore-src -r
 
+rm rs_addons/descriptors/annotators/KnnAnnotator.yaml
+wget -q -O rs_addons/descriptors/annotators/KnnAnnotator.yaml https://raw.githubusercontent.com/SUTURO/suturo_ci/master/installation_scripts/KnnAnnotator.yaml
+
+mv ~/bvlc_reference_caffenet.caffemodel rs_resources/caffe/models/bvlc_reference_caffenet/
+
 cd ../..
 

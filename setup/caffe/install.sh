@@ -24,11 +24,4 @@ cmake .. >> ../../cmake_output
 echo "running make all"
 make -j all >> ../../make_output
 
-cd ..
-
-python scripts/download_model_binary.py models/bvlc_reference_caffenet/
-
-cp bvlc_reference_caffenet/bvlc_reference_caffenet.caffemodel ~
-
 cd ../../..
-

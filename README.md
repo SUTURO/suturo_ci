@@ -49,6 +49,8 @@ Download bvlc_reference_caffenet.model used by perception and save it in $HOME.
     
 Install all the Workspaces
 Do this from outside the repo this will create a SUTURO_WSS folder with a the dependencies inside it.
-This will also move the model to the correct location
+This will also move the caffe model to the correct location
+**THIS WILL TAKE ATLEAST 30min**
+**Robosherlock is build using one Thread to fix crashes**
 
     source suturo_ci/installation_scripts/build.sh

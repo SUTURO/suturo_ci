@@ -34,10 +34,21 @@ This repository contains the scripts used by the SUTURO bachelor and master proj
 We generally recommend creating a SUTURO folder in your $HOME. In this folder you should clone this repository.
 
 ## install opencv and caffe
-Staying in SUTURO
+Staying in ~/SUTURO
 
     source setup/opencv/install.sh
     sudo make install opencv/opencv4_5_1
 
     source setup/caffe/install.sh
     sudo make install caffe/caffe
+    
+Download bvlc_reference_caffenet.model used by perception and save it in $HOME. 
+
+    python scripts/download_model_binary.py models/bvlc_reference_caffenet/
+    cp bvlc_reference_caffenet/bvlc_reference_caffenet.caffemodel ~
+    
+Install all the Workspaces
+Do this from outside the repo this will create a SUTURO_WSS folder with a the dependencies inside it.
+This will also move the model to the correct location
+
+    source suturo_ci/installation_scripts/build.sh

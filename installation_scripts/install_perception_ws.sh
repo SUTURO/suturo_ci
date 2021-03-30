@@ -6,13 +6,17 @@
 
 mkdir -p SUTURO_WSS/perception_ws/src
 
-echo -e "\033[1;31m###################### perception_ws ###############################"
+echo -e "###################### perception_ws ###############################"
 
-cd perception_ws/src
+cd SUTURO_WSS/perception_ws/src
 
 wstool init
 wstool merge https://raw.githubusercontent.com/SUTURO/suturo_perception/master/workspace.rosinstall -y
-wstool update
+
+git clone https://github.com/SUTURO/suturo_resources.git
+git clone https://github.com/RoboSherlock/robosherlock.git --recursive
+git clone https://github.com/Paniago82/rs_resources.git
+git clone https://github.com/Jastock/rs_addons.git
 
 rosdep install --from-path robosherlock --ignore-src -r
 rosdep install --from-path rs_resources --ignore-src -r
@@ -22,5 +26,5 @@ wget -q -O rs_addons/descriptors/annotators/KnnAnnotator.yaml https://raw.github
 
 mv ~/bvlc_reference_caffenet.caffemodel rs_resources/caffe/models/bvlc_reference_caffenet/
 
-cd ../..
+cd ..
 

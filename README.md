@@ -59,7 +59,7 @@ Your filestructure should now look like this:
 Staying in ~/SUTURO
 
     source suturo_ci/setup/opencv/install.sh
-    sudo make install suturo_ci/opencv/opencv4_5_1
+    sudo make install suturo_ci/opencv/opencv-4.5.1
     
     
 Your filestructure should now look like this:

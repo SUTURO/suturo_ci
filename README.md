@@ -31,26 +31,167 @@ This repository contains the scripts used by the SUTURO bachelor and master proj
     sudo -H pip3 install simplenlg http://www.jbox.dk/sling/sling-2.0.0-py3-none-linux_x86_64.whl tinyrpc==0.9.4 pyzmq
 
 ## clone this repo
-We generally recommend creating a SUTURO folder in your $HOME. In this folder you should clone this repository.
+Create a SUTURO folder in your home. In this folder you should clone this repository.
 
-## install opencv and caffe
+    cd ~
+    mkdir SUTURO
+    cd SUTURO
+    git clone https://github.com/SUTURO/suturo_ci.git
+
+
+Your filestructure should now look like this:
+```
+~  
+│
+└───SUTURO
+│   │
+│   └───suturo_ci
+│       │   
+│       └───setup
+│       └───installation_scripts
+│       └───...
+│   
+...
+```
+
+
+## install opencv (If you don't have it already)
 Staying in ~/SUTURO
 
-    source setup/opencv/install.sh
-    sudo make install opencv/opencv4_5_1
-
-    source setup/caffe/install.sh
-    sudo make install caffe/caffe
+    source suturo_ci/setup/opencv/install.sh
+    sudo make install suturo_ci/opencv/opencv4_5_1
     
+    
+Your filestructure should now look like this:
+   
+```
+~  
+│
+└───SUTURO
+│   │
+│   └───suturo_ci
+│   │   │   
+│   │   └───setup
+│   │   └───installation_scripts
+│   │   └───...
+│   │
+│   └───opencv
+│       │   
+│       └───opencv-4.5.1
+│       └───opencv_contrib-4.5.1
+│   
+...
+```
+
+
+## install caffe (If you don't have it already)
+Staying in ~/SUTURO
+
+    source suturo_ci/setup/caffe/install.sh
+    sudo make install suturo_ci/caffe/caffe
+    
+Your filestructure should now look like this:
+    
+```
+~  
+│
+└───SUTURO
+│   │
+│   └───suturo_ci
+│   │   │   
+│   │   └───setup
+│   │   └───installation_scripts
+│   │   └───...
+│   │
+│   └───opencv
+│   │   │   
+│   │   └───opencv-4.5.1
+│   │   └───opencv_contrib-4.5.1
+│   │
+│   └───caffe
+│       │   
+│       └───caffe-master
+│   
+...
+```
+    
+Still in $HOME (~)
 Download bvlc_reference_caffenet.model used by perception and save it in $HOME. 
 
-    python scripts/download_model_binary.py models/bvlc_reference_caffenet/
-    cp bvlc_reference_caffenet/bvlc_reference_caffenet.caffemodel ~
+    python caffe/caffe-master/scripts/download_model_binary.py caffe/caffe-master/models/bvlc_reference_caffenet/
+    cp caffe/caffe-master/models/bvlc_reference_caffenet/bvlc_reference_caffenet.caffemodel ~
+    
+    
+Your filestructure should now look like this:
+    
+```
+~  
+|
+│   bvlc_reference_caffenet.caffemodel
+|
+└───SUTURO
+│   │
+│   └───suturo_ci
+│   │   │   
+│   │   └───setup
+│   │   └───installation_scripts
+│   │   └───...
+│   │
+│   └───opencv
+│   │   │   
+│   │   └───opencv-4.5.1
+│   │   └───opencv_contrib-4.5.1
+│   │
+│   └───caffe
+│       │   
+│       └───caffe-master
+│   
+...
+```
+    
+
     
 Install all the Workspaces
 Do this from outside the repo this will create a SUTURO_WSS folder with a the dependencies inside it.
-This will also move the caffe model to the correct location
-**THIS WILL TAKE ATLEAST 30min**
+This will also move the caffe model to the correct location.
+
+**THIS WILL TAKE ATLEAST 30-60min**
+
 **Robosherlock is build using one Thread to fix crashes**
+This script does not stop when ```catkin build``` fails it will continue with the other workspaces.
 
     source suturo_ci/installation_scripts/build.sh
+
+
+```
+~  
+|
+│   bvlc_reference_caffenet.caffemodel
+|
+└───SUTURO
+│   │
+│   └───suturo_ci
+│   │   |
+│   │   ...
+│   │ 
+│   └───opencv
+│   │   |
+│   │   ...
+│   │
+│   └───caffe
+│   │   |
+│   │   ...
+│   │
+│   └───SUTURO_WSS
+│       |
+│       └───dependencies_ws
+│       └───knowledge_ws
+│       └───manipulation_ws
+│       └───navigation_ws
+│       └───perception_ws
+│       └───planning_ws
+│   
+...
+```
+
+After these steps every Workspace has its packages downloaded and build once.

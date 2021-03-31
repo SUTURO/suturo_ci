@@ -151,8 +151,8 @@ Your filestructure should now look like this:
     
 
     
-Install all the Workspaces
-Do this from outside the repo this will create a SUTURO_WSS folder with a the dependencies inside it.
+##Install all the Workspaces
+This will create a SUTURO_WSS folder with a the dependencies inside it.
 This will also move the caffe model to the correct location.
 
 **THIS WILL TAKE ATLEAST 30-60min**

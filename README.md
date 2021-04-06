@@ -5,6 +5,7 @@ This repository contains the scripts used by the SUTURO bachelor and master proj
 
 # Setting up a SUTURO development pc
 ## install dependencies
+    sudo apt install wget
     sudo sh -c 'echo "deb http://packages.ros.org/ros/ubuntu $(lsb_release -sc) main" > /etc/apt/sources.list.d/ros-latest.list'
 
     sudo apt-key adv --keyserver 'hkp://keyserver.ubuntu.com:80' --recv-key C1CF6E31E6BADE8868B172B4F42ED6FBAB17C654
@@ -17,19 +18,17 @@ This repository contains the scripts used by the SUTURO bachelor and master proj
     sudo sh -c 'echo "deb http://packages.osrfoundation.org/gazebo/ubuntu-stable `lsb_release -cs` main" > /etc/apt/sources.list.d/gazebo-stable.list'
     sudo sh -c 'echo "deb https://apache.bintray.com/couchdb-deb `lsb_release -cs` main" > /etc/apt/sources.list.d/couchdb.list'
     
-    sudo apt update
-    sudo apt install wget
-    
     wget https://hsr-user:jD3k4G2e@packages.hsr.io/tmc.key -O - | sudo apt-key add -
     wget http://packages.osrfoundation.org/gazebo.key -O - | sudo apt-key add -
     wget https://couchdb.apache.org/repo/bintray-pubkey.asc -O - | sudo apt-key add -
     sudo sh -c 'mkdir -p /etc/apt/auth.conf.d'
     sudo sh -c '/bin/echo -e "machine packages.hsr.io\nlogin hsr-user\npassword jD3k4G2e" >/etc/apt/auth.conf.d/auth.conf'
-
+    
     # We want couchdb configured without a preset
     sudo echo "couchdb couchdb/mode select none" | sudo debconf-set-selections
-
-    sudo apt-get install -y cmake g++ unzip libboost-all-dev libopenblas-dev libprotobuf-dev libleveldb-dev libsnappy-dev libopencv-dev libhdf5-serial-dev protobuf-compiler the python-dev libgflags-dev libgoogle-glog-dev liblmdb-dev python-pip python3-pip ros-melodic-desktop-full python-rosdep python-rosinstall python-rosinstall-generator python-wstool build-essential python-rosdep ros-melodic-tmc-desktop-full ros-melodic-roslisp-repl rapidjson-dev automake libxerces-c-dev libicu-dev libapr1-dev mongodb openjdk-8-jdk
+    
+    sudo apt update
+    sudo apt-get install -y cmake g++ unzip libboost-all-dev libopenblas-dev libprotobuf-dev libleveldb-dev libsnappy-dev libopencv-dev libhdf5-serial-dev protobuf-compiler the python-dev libgflags-dev libgoogle-glog-dev liblmdb-dev python-pip python3-pip ros-melodic-desktop-full python-rosdep python-rosinstall python-rosinstall-generator python-wstool build-essential python-rosdep ros-melodic-tmc-desktop-full ros-melodic-roslisp-repl rapidjson-dev automake libxerces-c-dev libicu-dev libapr1-dev mongodb openjdk-8-jdk libatlas-base-dev liblapack-dev libblas-dev
 
     sudo -H pip install protobuf tinyrpc==0.9.4 pyzmq pybullet scipy==1.2.2 casadi sortedcontainers hypothesis==4.34.0 pandas==0.24.2 numpy==1.16
     sudo -H pip3 install simplenlg http://www.jbox.dk/sling/sling-2.0.0-py3-none-linux_x86_64.whl tinyrpc==0.9.4 pyzmq
@@ -63,7 +62,6 @@ Your filestructure should now look like this:
 Staying in ~/SUTURO
 
     source suturo_ci/setup/opencv/install.sh
-    sudo make install suturo_ci/opencv/opencv-4.5.1
     
     
 Your filestructure should now look like this:
@@ -92,7 +90,6 @@ Your filestructure should now look like this:
 Staying in ~/SUTURO
 
     source suturo_ci/setup/caffe/install.sh
-    sudo make install suturo_ci/caffe/caffe
     
 Your filestructure should now look like this:
     

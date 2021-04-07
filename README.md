@@ -196,3 +196,14 @@ This script does not stop when ```catkin build``` fails it will continue with th
 ```
 
 After these steps every Workspace has its packages downloaded and build once.
+
+
+## Debugging your installation
+
+### Knowledge
+When catkin build fails with prolog _pkg_check_modules_internal
+in SUTURO_WSS/knowledge_ws/src try:
+    rosdep install --from-paths knowrob/ --ignore-src
+    
+
+

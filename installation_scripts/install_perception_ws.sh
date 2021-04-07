@@ -16,6 +16,7 @@ wstool merge https://raw.githubusercontent.com/SUTURO/suturo_perception/master/w
 git clone https://github.com/RoboSherlock/robosherlock.git --recursive
 git clone https://github.com/Paniago82/rs_resources.git
 git clone https://github.com/Jastock/rs_addons.git
+git clone https://github.com/SUTURO/suturo_perception.git
 
 rosdep install --from-path robosherlock --ignore-src -r
 rosdep install --from-path rs_resources --ignore-src -r

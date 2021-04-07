@@ -203,7 +203,14 @@ After these steps every Workspace has its packages downloaded and build once.
 ### Knowledge
 When catkin build fails with prolog _pkg_check_modules_internal
 in SUTURO_WSS/knowledge_ws/src try:
+    
     rosdep install --from-paths knowrob/ --ignore-src
     
+When knowledge starts with the error:
+    
+    '$open_shared_object'/3: libjvm.so: cannot open shared object file: No such file or directory
 
+Try:
+
+    export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/lib/jvm/java-11-openjdk-amd64/lib/server
 

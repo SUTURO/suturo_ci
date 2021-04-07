@@ -13,7 +13,6 @@ cd SUTURO_WSS/perception_ws/src
 wstool init
 wstool merge https://raw.githubusercontent.com/SUTURO/suturo_perception/master/workspace.rosinstall -y
 
-git clone https://github.com/SUTURO/suturo_resources.git
 git clone https://github.com/RoboSherlock/robosherlock.git --recursive
 git clone https://github.com/Paniago82/rs_resources.git
 git clone https://github.com/Jastock/rs_addons.git

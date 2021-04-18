@@ -32,6 +32,36 @@ This repository contains the scripts used by the SUTURO bachelor and master proj
 
     sudo -H pip install future protobuf tinyrpc==0.9.4 pyzmq pybullet==3.0.6 scipy==1.2.2 casadi sortedcontainers hypothesis==4.34.0 pandas==0.24.2 numpy==1.16
     sudo -H pip3 install simplenlg http://www.jbox.dk/sling/sling-2.0.0-py3-none-linux_x86_64.whl tinyrpc==0.9.4 pyzmq
+    
+## Install MongoDB Version 4+ (If you want to run Knowledge)
+To see your currently installed version:
+
+    mongo --eval 'db.runCommand({ connectionStatus: 1 })'
+
+If you see exception connection failed your mongodb server service is not running (run: sudo systemctl start mongod.service).
+If the command does not exist, follows these steps as well.
+
+Stop mongod service if it is runnning.
+
+     sudo systemctl stop mongod.service
+
+purge(/ hard uninstall) mongodb installs 
+
+    sudo apt-get purge mongo*
+    
+add apt keys
+
+    curl -fsSL https://www.mongodb.org/static/pgp/server-4.4.asc | sudo apt-key add -
+    echo "deb [ arch=amd64,arm64 ] https://repo.mongodb.org/apt/ubuntu bionic/mongodb-org/4.4 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-4.4.list
+    sudo apt-get update     # You should see OK:9 https://repo.mongodb.org/apt/ubuntu bionic/mongodb-org/4.4 Release 
+    sudo apt install mongodb-org
+    # Test start mongo server service
+    sudo systemctl start mongod.service
+    sudo systemctl status mongod
+    # You should see: active (running) highlighted in green
+    # Check your MongoDB Version again:
+    mongo --eval 'db.runCommand({ connectionStatus: 1 })'
+    # Should be 4.4.5 or higher
 
 ## clone this repo
 Create a SUTURO folder in your home. In this folder you should clone this repository.

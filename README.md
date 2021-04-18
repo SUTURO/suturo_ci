@@ -53,7 +53,10 @@ add apt keys
 
     curl -fsSL https://www.mongodb.org/static/pgp/server-4.4.asc | sudo apt-key add -
     echo "deb [ arch=amd64,arm64 ] https://repo.mongodb.org/apt/ubuntu bionic/mongodb-org/4.4 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-4.4.list
-    sudo apt-get update     # You should see OK:9 https://repo.mongodb.org/apt/ubuntu bionic/mongodb-org/4.4 Release 
+    sudo apt-get update     # You should see OK:9 https://repo.mongodb.org/apt/ubuntu bionic/mongodb-org/4.4 Release
+    
+Install and test
+    
     sudo apt install mongodb-org
     # Test start mongo server service
     sudo systemctl start mongod.service

@@ -65,6 +65,8 @@ Install and test
     # Check your MongoDB Version again:
     mongo --eval 'db.runCommand({ connectionStatus: 1 })'
     # Should be 4.4.5 or higher
+    # if so:
+    sudo systemctl enable mongod
 
 ## clone this repo
 Create a SUTURO folder in your home. In this folder you should clone this repository.

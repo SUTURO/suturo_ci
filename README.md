@@ -28,7 +28,7 @@ This repository contains the scripts used by the SUTURO bachelor and master proj
     sudo echo "couchdb couchdb/mode select none" | sudo debconf-set-selections
     
     sudo apt update
-    sudo apt-get install -y cmake g++ unzip libboost-all-dev libopenblas-dev libprotobuf-dev libleveldb-dev libsnappy-dev libopencv-dev libhdf5-serial-dev protobuf-compiler the python-dev libgflags-dev libgoogle-glog-dev liblmdb-dev python-pip python3-pip ros-melodic-desktop-full python-rosdep python-rosinstall python-rosinstall-generator python-wstool build-essential python-rosdep ros-melodic-tmc-desktop-full ros-melodic-roslisp-repl rapidjson-dev automake libxerces-c-dev libicu-dev libapr1-dev mongodb openjdk-8-jdk libatlas-base-dev liblapack-dev libblas-dev ros-melodic-costmap-2d ros-melodic-cl-tf2
+    sudo apt-get install -y cmake g++ unzip libboost-all-dev libopenblas-dev libprotobuf-dev libleveldb-dev libsnappy-dev libopencv-dev libhdf5-serial-dev protobuf-compiler the python-dev libgflags-dev libgoogle-glog-dev liblmdb-dev python-pip python3-pip ros-melodic-desktop-full python-rosdep python-rosinstall python-rosinstall-generator python-wstool build-essential python-rosdep ros-melodic-tmc-desktop-full ros-melodic-roslisp-repl rapidjson-dev automake libxerces-c-dev libicu-dev libapr1-dev mongodb openjdk-8-jdk libatlas-base-dev liblapack-dev libblas-dev ros-melodic-costmap-2d ros-melodic-cl-tf2  libjson-glib-dev
 
     sudo -H pip install future protobuf tinyrpc==0.9.4 pyzmq pybullet==3.0.6 scipy==1.2.2 casadi sortedcontainers hypothesis==4.34.0 pandas==0.24.2 numpy==1.16
     sudo -H pip3 install simplenlg http://www.jbox.dk/sling/sling-2.0.0-py3-none-linux_x86_64.whl tinyrpc==0.9.4 pyzmq
@@ -62,11 +62,44 @@ Install and test
     sudo systemctl start mongod.service
     sudo systemctl status mongod
     # You should see: active (running) highlighted in green
-    # Check your MongoDB Version again:
+    # if so check your MongoDB Version again:
     mongo --eval 'db.runCommand({ connectionStatus: 1 })'
     # Should be 4.4.5 or higher
     # if so:
     sudo systemctl enable mongod
+    
+If sudo systemctl status mongod says failed:
+Multiple things might be the cause
+    
++No /data/db folder
+
+    mkdir -p /data/db
+    
++Broken config file
+
+    # Try running:
+    /usr/bin/mongod --config /etc/mongod.conf
+    # If it fails:
+    /usr/bin/mongod
+    # If running  without a config works, create a backup of the original config and create a new empty one
+    sudo mv /etc/mongod.conf /etc/mongod.conf.backup
+    sudo touch /etc/mongod.conf
+
++Wrong permissions
+
+    ls -l /var/lib/mongodb
+    
+    # These files should be owned by mongodb not root
+    # to change that run:
+    
+    chown -R mongodb:mongodb /var/lib/mongodb
+    
++ try repairing the db
+    
+    sudo rm /var/lib/mongodb/mongod.lock
+    mongod --repair
+    
+
 
 ## clone this repo
 Create a SUTURO folder in your home. In this folder you should clone this repository.
@@ -245,6 +278,7 @@ When the installation of ros-melodic-tmc-desktop-full fails:
 
     sudo apt update
     sudo apt install -y couchdb
+    
 
 ### Knowledge
 When catkin build fails with prolog _pkg_check_modules_internal

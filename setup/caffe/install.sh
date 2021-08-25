@@ -23,5 +23,12 @@ echo "running cmake"
 cmake .. >> ../../cmake_output
 echo "running make all"
 make -j all >> ../../make_output
+echo "creating caffe.pb.h"
+cd ..
+protoc src/caffe/proto/caffe.proto --cpp_out=.
+mkdir include/caffe/proto
+mv src/caffe/proto/caffe.pb.h include/caffe/proto
+
+
 
 cd ../../..

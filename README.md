@@ -94,7 +94,7 @@ Multiple things might be the cause
     
     chown -R mongodb:mongodb /var/lib/mongodb
     
-+ try repairing the db
++try repairing the db
     
     sudo rm /var/lib/mongodb/mongod.lock
     mongod --repair

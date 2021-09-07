@@ -13,7 +13,7 @@ ENV APT_KEY_DONT_WARN_ON_DANGEROUS_USAGE=TRUE
 
 # Install the basics and gazebo
 RUN apt update && \
-    apt install --no-install-recommends -y ca-certificates software-properties-common wget git gnupg lsb-release apt-utils python-pip python3-venv python3-pip --no-install-recommends -y
+    apt install --no-install-recommends -y ca-certificates software-properties-common wget git gnupg lsb-release apt-utils python-pip python3-venv python3-pip curl apt-transport-https --no-install-recommends -y
     
 RUN sh -c 'echo "deb http://packages.ros.org/ros/ubuntu $(lsb_release -sc) main" > /etc/apt/sources.list.d/ros-latest.list' && \
     apt-key adv --keyserver 'hkp://keyserver.ubuntu.com:80' --recv-key C1CF6E31E6BADE8868B172B4F42ED6FBAB17C654 && \
@@ -22,14 +22,15 @@ RUN sh -c 'echo "deb http://packages.ros.org/ros/ubuntu $(lsb_release -sc) main"
     sh -c 'echo "deb https://packages.hsr.io/ros/ubuntu `lsb_release -cs` main" > /etc/apt/sources.list.d/tmc.list' && \
     sh -c 'echo "deb https://packages.hsr.io/tmc/ubuntu `lsb_release -cs` multiverse main" >> /etc/apt/sources.list.d/tmc.list' && \
     sh -c 'echo "deb http://packages.osrfoundation.org/gazebo/ubuntu-stable `lsb_release -cs` main" > /etc/apt/sources.list.d/gazebo-stable.list' && \
-    sh -c 'echo "deb https://apache.bintray.com/couchdb-deb `lsb_release -cs` main" > /etc/apt/sources.list.d/couchdb.list' && \
     wget https://hsr-user:jD3k4G2e@packages.hsr.io/tmc.key -q -O - | apt-key add - && \
     wget http://packages.osrfoundation.org/gazebo.key -q -O - | apt-key add - && \
-    wget https://couchdb.apache.org/repo/bintray-pubkey.asc -q -O - | apt-key add - && \
     sh -c 'mkdir -p /etc/apt/auth.conf.d' && \
     sh -c '/bin/echo -e "machine packages.hsr.io\nlogin hsr-user\npassword jD3k4G2e" >/etc/apt/auth.conf.d/auth.conf' && \
     sh -c 'echo "deb http://packages.ros.org/ros/ubuntu $(lsb_release -sc) main" > /etc/apt/sources.list.d/ros-latest.list' && \
     apt-key adv --keyserver 'hkp://keyserver.ubuntu.com:80' --recv-key C1CF6E31E6BADE8868B172B4F42ED6FBAB17C654 && \
+    curl https://couchdb.apache.org/repo/keys.asc | gpg --dearmor | sudo tee /usr/share/keyrings/couchdb-archive-keyring.gpg >/dev/null 2>&1  && \
+    source /etc/os-release  && \
+    echo "deb [signed-by=/usr/share/keyrings/couchdb-archive-keyring.gpg] https://apache.jfrog.io/artifactory/couchdb-deb/ ${VERSION_CODENAME} main" | sudo tee /etc/apt/sources.list.d/couchdb.list >/dev/null && \
     apt update && \
     echo "couchdb couchdb/mode select none" | debconf-set-selections
     
